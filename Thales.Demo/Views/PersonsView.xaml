@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Thales.Demo.Views.PersonsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Thales.Demo.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Persons" FontSize="23"/>
+            <Button Grid.Column="1" Content="Add Person" Command="{Binding AddPersonCommand}"
+                    Style="{StaticResource PrimaryButton}" Height="30"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,15,0,0">
+            <Border BorderBrush="{StaticResource BaseBorder}" BorderThickness="1" CornerRadius="4" SnapsToDevicePixels="True">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=Border}"/>
+                    </Grid.OpacityMask>
+                    <Border x:Name="Border" Background="White" CornerRadius="5"/>
+                    <ListView BorderThickness="0" ItemsSource="{Binding PersonsListItemViewModels}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:PersonListItemView PersonItemDropCommand="{Binding RoleDroppedCommand}" AssignedRole="{Binding AssignedRole}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

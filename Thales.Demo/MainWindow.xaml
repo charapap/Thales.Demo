@@ -1,0 +1,39 @@
+﻿<Window x:Class="Thales.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Thales.Demo"
+        xmlns:views="clr-namespace:Thales.Demo.Views"
+        xmlns:components="clr-namespace:Thales.Demo.Components"
+        xmlns:viewModels="clr-namespace:Thales.Demo.ViewModels"
+        mc:Ignorable="d" FontSize="14"
+        Title="Roles Manager" Height="650" Width="1000">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:AddPersonViewModel}">
+            <views:AddPersonView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:EditPersonViewModel}">
+            <views:EditPersonView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:AddRoleViewModel}">
+            <views:AddRoleView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:EditRoleViewModel}">
+            <views:EditRoleView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <components:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+            <ContentControl Margin="50 25" Content="{Binding CurrentModalViewModel}" />
+        </components:Modal>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <views:PersonsView Margin="20" DataContext="{Binding PersonsViewModel}"/>
+            <views:RolesView Grid.Column="1" Margin="20" DataContext="{Binding RolesViewModel}"/>
+        </Grid>
+    </Grid>
+</Window>
